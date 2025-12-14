@@ -160,12 +160,12 @@ object EtherwarpOverlay : Feature(
             }
 
             val camera = event.ctx.gameRenderer().mainCamera
-            val cameraPos = camera.position
+            val cameraPos = camera.position()
 
             val outlineShape = world.getBlockState(hitResult).getShape(
                 EmptyBlockGetter.INSTANCE,
                 hitResult,
-                CollisionContext.of(camera.entity)
+                CollisionContext.of(camera.entity())
             )
 
             Context.Immediate?.renderBoxShape(

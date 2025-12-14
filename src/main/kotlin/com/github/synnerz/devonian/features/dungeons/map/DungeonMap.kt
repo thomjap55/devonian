@@ -19,7 +19,7 @@ import com.mojang.blaze3d.textures.GpuTextureView
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer.*
 import net.minecraft.client.gui.render.TextureSetup
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import org.joml.Matrix3x2f
 import java.awt.Color
 import kotlin.math.PI
@@ -482,7 +482,7 @@ object DungeonMap : HudFeature(
                 u1 = (SKIN_HEAD_U + SKIN_HEAD_WIDTH).toFloat() / SKIN_TEX_WIDTH
                 v1 = (SKIN_HEAD_V + SKIN_HEAD_HEIGHT).toFloat() / SKIN_TEX_HEIGHT
                 maxDy = 4f
-                val skin = info.skin
+                val skin = info?.skin ?: return@forEach
                 val rl = skin.body.texturePath()
                 textureView = Devonian.minecraft.textureManager.getTexture(rl).textureView
             } else {
@@ -521,7 +521,7 @@ object DungeonMap : HudFeature(
             ctx.guiRenderState.submitGuiElement(
                 TexturedQuadRenderState(
                     BufferedImageRenderer.pipeline,
-                    TextureSetup.singleTexture(textureView),
+                    TextureSetup(textureView, null, null, null, null, null),
                     Matrix3x2f(ctx.pose()),
                     px + dxf - dxr, py + dyf - dyr,
                     px - dxf - dxr, py - dyf - dyr,
@@ -556,7 +556,7 @@ object DungeonMap : HudFeature(
                 ctx.guiRenderState.submitGuiElement(
                     TexturedQuadRenderState(
                         BufferedImageRenderer.pipeline,
-                        TextureSetup.singleTexture(markerAtlasUploader.textureView),
+                        TextureSetup(markerAtlasUploader.textureView, null, null, null, null, null),
                         Matrix3x2f(ctx.pose()),
                         px + dxf - dxr, py + dyf - dyr,
                         px - dxf - dxr, py - dyf - dyr,
@@ -591,7 +591,7 @@ object DungeonMap : HudFeature(
         mapRenderer.invalidate()
     }
 
-    val mcidMarkerAtlas = ResourceLocation.fromNamespaceAndPath("devonian", "dungeon_map_marker_atlas")!!
+    val mcidMarkerAtlas = Identifier.fromNamespaceAndPath("devonian", "dungeon_map_marker_atlas")!!
     val markerAtlasUploader = BufferedImageUploader.fromResource("/assets/devonian/dungeons/map/markerAtlas.png")!!
         .register(mcidMarkerAtlas)
 

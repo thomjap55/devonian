@@ -172,7 +172,7 @@ object ArrowAlignSolver : Feature(
             val textRenderer = minecraft.font
             val consumer = minecraft.renderBuffers().bufferSource()
             val layer = Font.DisplayMode.NORMAL
-            val camPos = ctx.camera.position
+            val camPos = ctx.camera.position()
 
             val scale = 0.03f
             val quat = Quaternionf(0.0, -0.7071067811865476, 0.0, 0.7071067811865476)

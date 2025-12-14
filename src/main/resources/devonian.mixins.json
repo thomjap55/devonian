@@ -37,7 +37,6 @@
     "YggdrasilMinecraftSessionServiceMixin",
     "accessor.AbstractContainerScreenAccessor",
     "accessor.CameraAccessor",
-    "accessor.ChatComponentAccessor",
     "accessor.GlDeviceAccessor",
     "accessor.GuiAccessor",
     "accessor.GuiGraphicsAccessor",

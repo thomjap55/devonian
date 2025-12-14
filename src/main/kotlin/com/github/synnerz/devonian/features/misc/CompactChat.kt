@@ -110,14 +110,14 @@ class CompactChatComponent(val times: Int = 0) : PlainTextContents {
 
     override fun text(): String = " ($times)"
 
-    override fun <T : Any?> visit(
+    override fun <T : Any> visit(
         styledContentConsumer: FormattedText.StyledContentConsumer<T>,
         style: Style
     ): Optional<T> {
         return styledContentConsumer.accept(style, text())
     }
 
-    override fun <T : Any?> visit(contentConsumer: FormattedText.ContentConsumer<T>): Optional<T> {
+    override fun <T : Any> visit(contentConsumer: FormattedText.ContentConsumer<T>): Optional<T> {
         return contentConsumer.accept(text())
     }
 

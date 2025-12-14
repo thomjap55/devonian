@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,15 +27,15 @@ abstract class InventoryScreenMixin extends AbstractRecipeBookScreen<InventoryMe
             method = "renderBg",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V"
+                    target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIII)V"
             )
     )
-    private void devonian$renderBg(GuiGraphics instance, RenderPipeline renderPipeline, ResourceLocation resourceLocation, int i, int j, float f, float g, int k, int l, int m, int n) {
+    private void devonian$renderBg(GuiGraphics instance, RenderPipeline renderPipeline, Identifier identifier, int i, int j, float f, float g, int k, int l, int m, int n) {
         int color = !CustomContainerColor.INSTANCE.isEnabled() ? -1 : CustomContainerColor.INSTANCE.getSETTING_CONTAINER_COLOR().get();
 
         instance.blit(
                 renderPipeline,
-                resourceLocation,
+                identifier,
                 i,
                 j,
                 0.0f,

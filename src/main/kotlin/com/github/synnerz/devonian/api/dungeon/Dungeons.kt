@@ -14,7 +14,7 @@ import net.minecraft.network.protocol.game.ServerboundUseItemOnPacket
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
-import net.minecraft.world.entity.monster.Zombie
+import net.minecraft.world.entity.monster.zombie.Zombie
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.entity.SkullBlockEntity
 import java.util.concurrent.ConcurrentHashMap

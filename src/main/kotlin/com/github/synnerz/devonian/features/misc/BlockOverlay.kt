@@ -90,7 +90,7 @@ object BlockOverlay : Feature(
                         .getShape(
                             EmptyBlockGetter.INSTANCE,
                             blockPos,
-                            CollisionContext.of(camera.entity)
+                            CollisionContext.of(camera.entity())
                         )
 
                     harharImLosingMyFuckingSanity = blockShape.toAabbs().map { it.move(blockPos) }

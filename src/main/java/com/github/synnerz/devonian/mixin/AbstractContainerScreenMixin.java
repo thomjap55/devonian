@@ -25,7 +25,7 @@ public abstract class AbstractContainerScreenMixin {
     @Final
     protected AbstractContainerMenu menu;
 
-    @Shadow protected abstract void renderSlot(GuiGraphics context, Slot slot);
+    @Shadow protected abstract void renderSlot(GuiGraphics guiGraphics, Slot slot, int i, int j);
 
     @Inject(
             method = "slotClicked",
@@ -74,13 +74,13 @@ public abstract class AbstractContainerScreenMixin {
             method = "renderSlots",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;)V"
+                    target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;II)V"
             )
     )
-    private void devonian$drawSlots(AbstractContainerScreen instance, GuiGraphics guiGraphics, Slot slot) {
+    private void devonian$drawSlots(AbstractContainerScreen instance, GuiGraphics guiGraphics, Slot slot, int i, int j) {
         if (new RenderSlotEvent(slot, guiGraphics).post()) return;
 
-        renderSlot(guiGraphics, slot);
+        renderSlot(guiGraphics, slot, i, j);
     }
 
     @Inject(

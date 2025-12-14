@@ -79,7 +79,7 @@ object LividSolver : Feature(
             val entity = lividEnt ?: return@on
             val matrixStack = event.ctx.matrices()
 
-            val cam = minecraft.gameRenderer.mainCamera.position.reverse()
+            val cam = minecraft.gameRenderer.mainCamera.position().reverse()
             val width = entity.bbWidth.toDouble()
             val halfWidth = width / 2.0
 

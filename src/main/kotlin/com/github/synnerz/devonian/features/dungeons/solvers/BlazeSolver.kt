@@ -8,7 +8,7 @@ import com.github.synnerz.devonian.api.events.*
 import com.github.synnerz.devonian.config.Categories
 import com.github.synnerz.devonian.features.Feature
 import com.mojang.blaze3d.vertex.PoseStack
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.block.Blocks
@@ -235,7 +235,7 @@ object BlazeSolver : Feature(
         val z2 = pos2.z.toFloat()
 
         val normalized = Vector3f(x2 - x1, y2 - y1, z2 - z1).normalize()
-        val consumer = minecraft.renderBuffers().bufferSource().getBuffer(RenderType.LINE_STRIP)
+        val consumer = minecraft.renderBuffers().bufferSource().getBuffer(RenderTypes.LINES_TRANSLUCENT)
         val camPos = minecraft.cameraEntity ?: return
         val stack = PoseStack()
         stack.pushPose()

@@ -33,7 +33,7 @@ import com.github.synnerz.devonian.utils.Location
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import org.slf4j.LoggerFactory
 import java.util.UUID
 
@@ -46,7 +46,7 @@ object Devonian : ClientModInitializer {
     ).contains(minecraft.gameProfile.id)
     val keybindCategory by lazy {
         KeyMapping.Category.register(
-            ResourceLocation.fromNamespaceAndPath(
+            Identifier.fromNamespaceAndPath(
                 "devonian",
                 "keybinds"
             )

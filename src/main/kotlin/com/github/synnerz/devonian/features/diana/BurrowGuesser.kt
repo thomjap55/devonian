@@ -10,7 +10,7 @@ import com.github.synnerz.devonian.mixin.accessor.LocalPlayerAccessor
 import com.github.synnerz.devonian.utils.math.MathUtils
 import com.mojang.blaze3d.vertex.PoseStack
 import kotlinx.atomicfu.atomic
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket
@@ -77,9 +77,9 @@ object BurrowGuesser : Feature(
 
         if (SETTING_REMEMBER_PREVIOUS_GUESSES.get()) {
             val guess = guessPos.value
-            val player = minecraft.player
+            val player = minecraft.player ?: return
             if (
-                guess != null && player != null &&
+                guess != null &&
                 (player.x - guess.x).pow(2) + (player.y - guess.y).pow(2) + (player.z - guess.z).pow(2) > 100 &&
                 (if (guess.z < -30) -230 < guess.x else -300 < guess.x) && guess.x < 210 &&
                 -240 < guess.z && guess.z < 210 &&
@@ -388,8 +388,8 @@ object BurrowGuesser : Feature(
                 phase = true
             )
 
-            val consumer = minecraft.renderBuffers().bufferSource().getBuffer(RenderType.LINES)
-            val camPos = event.ctx.worldState().cameraRenderState.pos ?: return@on
+            val consumer = minecraft.renderBuffers().bufferSource().getBuffer(RenderTypes.LINES)
+            val camPos = event.ctx.worldState().cameraRenderState.pos
             val stack = PoseStack()
             stack.pushPose()
             stack.translate(camPos.reverse())
