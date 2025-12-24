@@ -1,9 +1,11 @@
 package com.github.synnerz.devonian.features.dungeons
 
 import com.github.synnerz.devonian.api.dungeon.Dungeons
+import com.github.synnerz.devonian.api.dungeon.Stages
 import com.github.synnerz.devonian.api.events.*
 import com.github.synnerz.devonian.config.Categories
 import com.github.synnerz.devonian.features.Feature
+import com.github.synnerz.devonian.utils.BasicState
 import net.minecraft.network.protocol.game.ClientboundContainerClosePacket
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket
 import net.minecraft.network.protocol.game.ServerboundContainerClosePacket
@@ -16,6 +18,10 @@ object CustomTerminalScale : Feature(
     "catacombs",
     subcategory = "Terminals"
 ) {
+    override fun createRequirements(): List<BasicState<Boolean>?> {
+        return super.createRequirements() + listOf(Stages.Terminals.isActiveState)
+    }
+
     private val SETTING_TERMINAL_SCALE = addSlider(
         "terminalScale",
         0.0,
@@ -53,7 +59,6 @@ object CustomTerminalScale : Feature(
             }
 
             if (packet !is ClientboundOpenScreenPacket) return@on
-            if (!Dungeons.inBoss.value || Dungeons.floor.floorNum != 7) return@on
 
             val title = packet.title.string
             val guiScale = minecraft.options.guiScale()

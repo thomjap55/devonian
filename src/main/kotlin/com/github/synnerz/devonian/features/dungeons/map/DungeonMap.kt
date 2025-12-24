@@ -12,6 +12,7 @@ import com.github.synnerz.devonian.config.Categories
 import com.github.synnerz.devonian.hud.HudFeature
 import com.github.synnerz.devonian.hud.texthud.StylizedTextHud
 import com.github.synnerz.devonian.hud.texthud.StylizedTextHud.*
+import com.github.synnerz.devonian.utils.BasicState
 import com.github.synnerz.devonian.utils.BoundingBox
 import com.github.synnerz.devonian.utils.TexturedQuadRenderState
 import com.github.synnerz.devonian.utils.math.MathUtils
@@ -327,6 +328,10 @@ object DungeonMap : HudFeature(
         subcategory = "Style",
     )
 
+    override fun createRequirements(): List<BasicState<Boolean>?> {
+        return super.createRequirements() + listOf(Dungeons.inBoss.map(Boolean::not))
+    }
+
     private val mapRenderer = DungeonMapBaseRenderer()
 
     private var dump = false
@@ -422,7 +427,6 @@ object DungeonMap : HudFeature(
     }
 
     override fun drawImpl(ctx: GuiGraphics) {
-        if (Dungeons.inBoss.value) return
         var floor = Dungeons.floor
         if (floor == FloorType.None) floor = FloorType.M7
         mapRenderer.draw(ctx, x.toFloat(), y.toFloat(), (1.0 / minecraft.window.guiScale).toFloat())

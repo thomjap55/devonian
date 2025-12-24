@@ -217,6 +217,7 @@ object Devonian : ClientModInitializer {
         TerminalSolvers,
         RelicTimer,
         CustomTerminalScale,
+        SimonSaysProgressDisplay,
 
         // Debug
         CopyItem,
